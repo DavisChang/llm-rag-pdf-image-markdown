@@ -14,8 +14,8 @@ from langchain.schema import Document
 
 CHROMA_PATH = "chroma"
 DATA_PATH = "data/"
-CHUNK_SIZE = 500
-CHUNK_OVERLAY = 100
+CHUNK_SIZE = 1000
+CHUNK_OVERLAY = 200
 
 
 def main():
