@@ -13,15 +13,34 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
 
-
-## First init
+## Init
 
 ```bash
-mkdir my-project
-cd my-project
-cdk init app --language typescript
+npx aws-cdk init app --language typescript
 ```
 
-## Container image for Lambda function
+## Create a App
 
-[https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#runtimes-images-lp](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#runtimes-images-lp)
+```bash
+cd docker-image
+# run docker (Mac, m2)
+docker build --platform linux/amd64 -t docker-image:test .
+docker run --rm -p 9000:8080 docker-image:test
+
+# test
+curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+```
+
+## Deploy to AWS
+
+```bash
+
+## prepare
+aws sts get-caller-identity
+npx aws-cdk bootstrap --region ap-southeast-2
+
+## deploy and  try out
+npx aws-cdk deploy
+```
+
+![deployment](./images/deployment.png)
